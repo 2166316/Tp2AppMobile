@@ -1,14 +1,18 @@
 package com.example.tp2appmobile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,13 +44,24 @@ public class Partie1vue1 extends MainActivity{
 
             }
         });
+
+        String filePath = Environment.getRootDirectory().getPath();
+        Log.println(Log.INFO,"!!!path external storage",filePath);
     }
 
     public void prochaineVue(){
         if(imageSelectionnerID!=0 && imageNum!=""){
             Intent intent = new Intent(this, Partie1vue2.class);
-            intent.putExtra("idImage",imageSelectionnerID);
+            //passer le texte
             intent.putExtra("nomImage",imageNum);
+
+            //passer l'image
+            ImageView imageView = findViewById(imageSelectionnerID);
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            ByteArrayOutputStream bs = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs);
+            intent.putExtra("image_byte", bs.toByteArray());
+
             startActivity(intent);
         }
     }
