@@ -1,5 +1,6 @@
 package com.example.tp2appmobile;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,15 +12,18 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Partie1 extends MainActivity{
+public class Partie1vue1 extends MainActivity{
 
     public boolean imagesAfficher;
 
     public int imageSelectionnerID;
 
-    public Partie1() {
+    public String imageNum;
+
+    public Partie1vue1() {
         this.imagesAfficher = false;
         this.imageSelectionnerID =0;
+        this.imageNum = "";
     }
 
     @Override
@@ -32,15 +36,18 @@ public class Partie1 extends MainActivity{
         buttonSuivant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                prochaineVue();
 
             }
         });
     }
 
     public void prochaineVue(){
-        if(imageSelectionnerID!=0){
-            
+        if(imageSelectionnerID!=0 && imageNum!=""){
+            Intent intent = new Intent(this, Partie1vue2.class);
+            intent.putExtra("idImage",imageSelectionnerID);
+            intent.putExtra("nomImage",imageNum);
+            startActivity(intent);
         }
     }
 
@@ -107,6 +114,8 @@ public class Partie1 extends MainActivity{
             @Override
             public void onClick(View view) {
                 surbrillance(view.getId());
+                imageNum = "image1";
+
             }
         });
 
@@ -115,6 +124,7 @@ public class Partie1 extends MainActivity{
             @Override
             public void onClick(View view) {
                 surbrillance(view.getId());
+                imageNum = "image2";
             }
         });
 
@@ -123,6 +133,7 @@ public class Partie1 extends MainActivity{
             @Override
             public void onClick(View view) {
                 surbrillance(view.getId());
+                imageNum = "image3";
             }
         });
 
@@ -131,6 +142,7 @@ public class Partie1 extends MainActivity{
             @Override
             public void onClick(View view) {
                 surbrillance(view.getId());
+                imageNum = "image4";
             }
         });
     }
