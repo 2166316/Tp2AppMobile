@@ -17,12 +17,19 @@ import android.widget.TextView;
 public class Partie1vue2 extends AppCompatActivity {
 
 
-    MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_partie1vue2);
+
+        //start music
+        if(mediaPlayer ==null){
+            mediaPlayer = MediaPlayer.create(this,R.raw.song);
+            mediaPlayer.setLooping(true);
+        }
+        mediaPlayer.start();
 
 
 
@@ -49,8 +56,12 @@ public class Partie1vue2 extends AppCompatActivity {
     }
 
     public void retourPartie1(){
+        if(mediaPlayer !=null){
+            mediaPlayer.stop();
+        }
         Intent intent = new Intent(this, Partie1vue1.class);
         startActivity(intent);
+
     }
 
 

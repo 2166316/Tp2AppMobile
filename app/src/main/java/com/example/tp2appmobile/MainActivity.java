@@ -1,14 +1,24 @@
 package com.example.tp2appmobile;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import  android.content.Context;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+
+    Address address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +45,17 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, Partie1vue1.class);
             super.startActivity(intent);
         }else if(itemId==R.id.partie2) {
-            intent = new Intent(this, Partie2.class);
-            super.startActivity(intent);
-        }
 
+            intent = new Intent(this, Partie2Commande.class);
+            super.startActivity(intent);
+
+        }
 
         return true;
     }
+
+
+
+
 
 }
